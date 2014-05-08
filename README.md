@@ -5,7 +5,8 @@ node js app/service for to fill a data base with the current money exchange
 
 
 HOW TO INSTALL
-> <<Instal node.js>>
+
+> Instal node.js (http://howtonode.org/how-to-install-nodejs)
 
 > sudo apt-get install mongodb-server
 
