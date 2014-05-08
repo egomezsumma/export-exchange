@@ -23,6 +23,9 @@ var file          = __dirname + '/currencies.json';
 var currencyCodes = eval('(' + fs.readFileSync(file).toString() +')');
 var app           = express();
 
+
+var turnOnServers = process.argv[1] == "-s";
+
 //Descomentar para correr desde consola la tarea
 main();
 
@@ -267,12 +270,13 @@ function fixParams(callback)
 
 function onFinishJob()
 {
-	
-		console.log("Task finished");
+	console.log("Task finished");
+	mongoose.connection.close();
+	//process.exit(0);
 }
 
 // For use the app like a web service
 http.createServer(app).listen(3000, function(){
-	//console.log('listening on 3000\n');
+	console.log('<<Server listening on 3000>>\n');
 });
 
