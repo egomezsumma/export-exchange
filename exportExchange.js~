@@ -19,7 +19,7 @@ var CurrencyClass;
 
 // Miscelaneous
 var apiCurrency   = 'http://rate-exchange.appspot.com/currency';
-var file          = __dirname + '/currencies.json';
+var file          = __dirname + '/currencys.json';
 var currencyCodes = eval('(' + fs.readFileSync(file).toString() +')');
 var app           = express();
 
