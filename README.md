@@ -10,11 +10,11 @@ HOW TO INSTALL
 
 > sudo apt-get install mongodb-server
 
-> npm install express
+> npm install express (en el directorio que se encuentra exportExchange.js)
 
-> npm install mongodb
+> npm install mongodb (en el directorio que se encuentra exportExchange.js)
 
-> npm install mongoose
+> npm install mongoose (en el directorio que se encuentra exportExchange.js)
 
 > bash: node exportExchange.js
 
