@@ -24,7 +24,7 @@ var currencyCodes = eval('(' + fs.readFileSync(file).toString() +')');
 var app           = express();
 
 //Descomentar para correr desde consola la tarea
-//main();
+main();
 
 //===========================================================================//
 // SERVICES                                                                  //
