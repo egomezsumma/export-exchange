@@ -21,7 +21,7 @@ HOW TO INSTALL
 
 HOW TO USE IT
 
-> For console run just do : node exportExchange.js
+> For fill de data base (dbtest@localhost) with all the currencies exchange run in terminal : node exportExchange.js
 
 > For fill de data base (dbtest@localhost) with all the currencies exchange do a GET 127.0.0.1:3000 
 
