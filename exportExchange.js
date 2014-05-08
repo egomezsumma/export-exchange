@@ -1,9 +1,3 @@
-// TO INSTALL
-// sudo apt-get install mongodb-server
-// npm install express
-// npm install mongodb
-// npm install mongoose
-
 //===========================================================================//
 // REQUIRED                                                                  //
 //===========================================================================//
@@ -38,16 +32,6 @@ var app           = express();
 app.get('/', function(req, res) 
 {
 	getAllExchangesAndSave(currencyCodes, res);
-	/*getAllCurrencyChange(
-		currencyCodes, 
-		function(changes)
-		{
-			saveInDB(changes);
-			
-			res.writeHead(200, {'Content-Type': 'text/plain'});
-			res.end(JSON.stringify(changes));			
-		}
-	)*/
 });
 
 app.get('/:from/:to', function(req, res) 
@@ -77,7 +61,6 @@ app.get('/:from/:to/:amount', function(req, res)
 	);
 }); 
 
-
 function getAllExchangesAndSave(currencyCodes, res)
 {
 	getAllCurrencyChange(
@@ -106,7 +89,6 @@ function main()
 //===========================================================================//
 function getOneChangeFromRequest(req, callback)
 {
-//	var changes = [];
 	getCurrencyConverted(
 		req.params.from, 
 		req.params.to, 
