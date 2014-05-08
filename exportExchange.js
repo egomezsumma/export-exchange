@@ -81,6 +81,7 @@ function main()
 	var res = {}
 	res.writeHead = doNothing;
 	res.end = doNothing;
+	console.log("\nProcesing currencies: " + currencyCodes);
 	getAllExchangesAndSave(currencyCodes,res);
 }
 
@@ -199,17 +200,35 @@ function onDbConectSucces(changes)
 	removeAllDocs(CurrencyClass,
 		function()
 		{
-			console.log("coleción Currency vaciada con exito");
-			console.log("antes de guardar " +  changes.length + " cambios de " + currencyCodes.length + " monedas.");			
-		  	changes.forEach(saveAChange);
+			var changesLen = changes.length; 
+			console.log("dbtest.currencies collection empty with success");
+			console.log("Before save " +  changesLen  + " exchanges from " + currencyCodes.length + " diferent currencies.");			
+		  	
+		  	asycForEach(changes, saveAChange, onFinishJob);
+		  	//changes.forEach(saveAChange, );
 		}
 	);	
+}
+
+function asycForEach(arr, preocesFuction, onFinish)
+{
+	var count = arr.length;
+	for(var i =0; i < arr.length ; i++)
+	{
+		var item = arr[i];
+		var callback = function()
+		{
+			count--
+			if(count==0) onFinish();
+		}
+		preocesFuction(item,callback);
+	}
 }
 
 function getSchema()
 {
 	// yay!
-	console.log("db connection ok");
+	console.log("dbtest data base connection ok");
 
 	//Creating schema
 	var currencySchema = mongoose.Schema(schema);
@@ -221,11 +240,11 @@ function getSchema()
 	return  mongoose.model('Currency', currencySchema);
 }
 
-function saveAChange(aChange)
+function saveAChange(aChange, callback)
 {	  
 	var aChangeDoc = new CurrencyClass(aChange);
 	//console.log(aChangeDoc.convert(100)); 
-	aChangeDoc.save(function (err, changeSaved) { if (err) return console.error(err);});	
+	aChangeDoc.save(function (err, changeSaved) { callback(); if (err) return console.error(err);});	
 }
 
 function removeAllDocs(model, onFinish)
@@ -246,7 +265,14 @@ function fixParams(callback)
     return res;
 }
 
+function onFinishJob()
+{
+	
+		console.log("Task finished");
+}
+
+// For use the app like a web service
 http.createServer(app).listen(3000, function(){
-	console.log('listening on 3000\n');
+	//console.log('listening on 3000\n');
 });
 
